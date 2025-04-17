@@ -1,0 +1,751 @@
+:root {
+    --black: #0a0a0a;
+    --dark-grey: #1a1a1a;
+    --crimson-red: #8b0000;
+    --metallic-gold: #b8860b;
+    --light-gold: #daa520;
+    --white: #ffffff;
+    --off-white: #f5f5f5;
+    --gradient-start: rgba(10, 10, 10, 0.95);
+    --gradient-end: rgba(26, 26, 26, 0.95);
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23b8860b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l7.07 17 2.51-7.39L21 11.07z"/></svg>'), auto;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    font-size: 16px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-sm);
+}
+
+h1 { font-size: 3.5rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 1.75rem; }
+p { margin-bottom: var(--spacing-sm); }
+
+/* Header Styles */
+.header {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(10, 10, 10, 0.95) 0%,
+        rgba(26, 26, 26, 0.95) 100%);
+}
+
+.gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+        rgba(139, 0, 0, 0.2) 0%,
+        rgba(184, 134, 11, 0.2) 100%);
+}
+
+.noise-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+}
+
+.particles-overlay {
+    display: none;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: var(--spacing-xl) var(--spacing-md);
+    text-align: center;
+}
+
+.logo-container {
+    margin-bottom: var(--spacing-lg);
+}
+
+.flag, .emblem {
+    max-width: 200px;
+    height: auto;
+    margin: 0 auto var(--spacing-sm);
+    filter: drop-shadow(0 0 10px rgba(184, 134, 11, 0.3));
+}
+
+.title {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.motto {
+    font-size: 1.5rem;
+    color: var(--metallic-gold);
+    margin-bottom: var(--spacing-lg);
+    font-weight: 500;
+}
+
+/* Navigation */
+.main-nav {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.nav-link {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    position: relative;
+    padding: var(--spacing-xs) 0;
+    transition: color var(--transition-normal);
+}
+
+.nav-link:hover {
+    color: var(--metallic-gold);
+}
+
+.nav-underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--metallic-gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-normal);
+}
+
+.nav-link:hover .nav-underline {
+    transform: scaleX(1);
+}
+
+/* Main Content */
+.main-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: var(--spacing-xl) 0;
+}
+
+/* Quick Links */
+.quick-links-section {
+    width: 100%;
+    padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.quick-links-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.quick-link {
+    background: rgba(26, 26, 26, 0.6);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    color: var(--white);
+    transition: all var(--transition-normal);
+    border: 1px solid rgba(184, 134, 11, 0.2);
+}
+
+.quick-link:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--metallic-gold);
+}
+
+.icon-container {
+    width: 60px;
+    height: 60px;
+    background: rgba(184, 134, 11, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-sm);
+    color: var(--metallic-gold);
+    font-size: 1.5rem;
+}
+
+.link-content h3 {
+    color: var(--metallic-gold);
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Sections */
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-subtitle {
+    color: var(--metallic-gold);
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+/* About Section */
+.about-section {
+    width: 100%;
+    padding: var(--spacing-xl) var(--spacing-md);
+    background: linear-gradient(to bottom, rgba(26, 26, 26, 0.8), rgba(10, 10, 10, 0.9));
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.about-card {
+    background: rgba(26, 26, 26, 0.6);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    border: 1px solid rgba(184, 134, 11, 0.2);
+    transition: all var(--transition-normal);
+}
+
+.about-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--metallic-gold);
+}
+
+/* Military Section */
+.military-section {
+    padding: var(--spacing-xl) 0;
+    background: linear-gradient(to bottom, rgba(10, 10, 10, 0.9), rgba(26, 26, 26, 0.8));
+}
+
+.military-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.military-card {
+    background: rgba(26, 26, 26, 0.6);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+    border: 1px solid rgba(184, 134, 11, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.military-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--metallic-gold);
+}
+
+.military-image {
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+}
+
+.military-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.7));
+}
+
+.military-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform var(--transition-normal);
+}
+
+.military-card:hover .military-image img {
+    transform: scale(1.05);
+}
+
+.military-content {
+    padding: var(--spacing-lg);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.military-content h3 {
+    color: var(--metallic-gold);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.4rem;
+    line-height: 1.3;
+}
+
+.military-content p {
+    color: var(--off-white);
+    margin-bottom: var(--spacing-md);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    flex: 1;
+}
+
+.military-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: linear-gradient(45deg, var(--metallic-gold), var(--light-gold));
+    color: var(--black);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-decoration: none;
+    margin-top: auto;
+    width: fit-content;
+}
+
+.military-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);
+    background: linear-gradient(45deg, var(--light-gold), var(--metallic-gold));
+}
+
+.military-link i {
+    transition: transform var(--transition-normal);
+}
+
+.military-link:hover i {
+    transform: translateX(4px);
+}
+
+/* Government Section */
+.government-section {
+    width: 100%;
+    padding: var(--spacing-xl) var(--spacing-md);
+    background: linear-gradient(to bottom, rgba(26, 26, 26, 0.8), rgba(10, 10, 10, 0.9));
+}
+
+.government-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.government-card {
+    background: rgba(26, 26, 26, 0.6);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    border: 1px solid rgba(184, 134, 11, 0.2);
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.government-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--metallic-gold);
+}
+
+.government-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(184, 134, 11, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--metallic-gold);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.government-content h3 {
+    color: var(--metallic-gold);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.4rem;
+    line-height: 1.3;
+}
+
+.government-content p {
+    color: var(--off-white);
+    margin-bottom: var(--spacing-md);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.government-content ul {
+    list-style-type: none;
+    padding-left: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+}
+
+.government-content ul li {
+    position: relative;
+    padding-left: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    color: var(--off-white);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.government-content ul li::before {
+    content: "•";
+    color: var(--metallic-gold);
+    position: absolute;
+    left: 0;
+}
+
+/* Footer */
+.footer {
+    width: 100%;
+    background-color: var(--dark-grey);
+    padding: var(--spacing-lg) 0;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    text-align: center;
+}
+
+.footer-logo {
+    margin-bottom: var(--spacing-md);
+}
+
+.footer-emblem {
+    max-width: 100px;
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(184, 134, 11, 0.3));
+}
+
+.copyright {
+    color: var(--off-white);
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content,
+    .main-content,
+    .quick-links-section,
+    .about-section,
+    .military-section,
+    .government-section {
+        padding: var(--spacing-lg) var(--spacing-sm);
+    }
+
+    .quick-links-container,
+    .about-grid,
+    .military-grid,
+    .government-grid {
+        padding: 0 var(--spacing-sm);
+    }
+
+    :root {
+        --spacing-lg: 3rem;
+        --spacing-xl: 4rem;
+    }
+
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+
+    .main-nav {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .government-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .government-card {
+        padding: var(--spacing-md);
+    }
+}
+
+/* Smooth Animations */
+.header-background,
+.gradient-overlay,
+.noise-overlay {
+    transition: opacity 0.5s ease;
+}
+
+.header:hover .gradient-overlay {
+    opacity: 0.8;
+}
+
+/* Add subtle animation to header background */
+@keyframes subtle-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.header-background {
+    background: linear-gradient(135deg, 
+        rgba(10, 10, 10, 0.95) 0%,
+        rgba(26, 26, 26, 0.95) 50%,
+        rgba(10, 10, 10, 0.95) 100%);
+    background-size: 200% 200%;
+    animation: subtle-gradient 15s ease infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-grey);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--metallic-gold);
+    border-radius: 6px;
+    border: 3px solid var(--dark-grey);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--light-gold);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    position: relative;
+    background-color: var(--dark-grey);
+    margin: auto;
+    padding: var(--spacing-lg);
+    width: 90%;
+    max-width: 1000px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--metallic-gold);
+    box-shadow: var(--shadow-lg);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+    transform: scale(1);
+}
+
+.close-modal {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    color: var(--metallic-gold);
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color var(--transition-normal);
+    z-index: 1;
+}
+
+.close-modal:hover {
+    color: var(--light-gold);
+}
+
+.modal h2 {
+    color: var(--metallic-gold);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+    font-size: 2rem;
+}
+
+.modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+}
+
+.modal-image {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: var(--border-radius-sm);
+    position: relative;
+}
+
+.modal-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.7));
+}
+
+.modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.modal-text {
+    color: var(--white);
+}
+
+.modal-text h3 {
+    color: var(--metallic-gold);
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+    font-size: 1.3rem;
+}
+
+.modal-text p {
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.6;
+}
+
+.modal-text ul {
+    list-style-type: none;
+    padding-left: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.modal-text ul li {
+    position: relative;
+    padding-left: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.5;
+}
+
+.modal-text ul li::before {
+    content: "•";
+    color: var(--metallic-gold);
+    position: absolute;
+    left: 0;
+}
+
+/* Responsive Design for Military Section */
+@media (max-width: 768px) {
+    .military-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .military-image {
+        height: 200px;
+    }
+
+    .modal-body {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-image {
+        height: 300px;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: var(--spacing-md);
+    }
+
+    .modal h2 {
+        font-size: 1.8rem;
+    }
+} 
